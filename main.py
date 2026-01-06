@@ -14,8 +14,6 @@ dpg.set_viewport_large_icon('data/Images/GreatBall.ico')
 fullMon = pd.read_csv('data/Lists/pokemon.csv')
 monNames = fullMon['Name'].tolist()
 
-print(monNames)
-
 with dpg.window(tag= "Welcome", label="Welcome", height = int(dpg.get_viewport_height()), width = int(dpg.get_viewport_width())):
     dpg.add_text("Welcome to ZDex!")
     dpg.add_text("All Pokemon", indent = int(dpg.get_viewport_width()/2))
