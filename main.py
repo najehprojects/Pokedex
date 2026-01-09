@@ -80,6 +80,23 @@ class App(ctk.CTk):
             pady = 10
         )
 
+        self.imageTab = ImageTabs(
+            master=self,
+            width=550,
+            height=620,
+            #image="data/Images/Sprites/0001.png",
+        )
+
+        self.imageTab.grid(
+            row=1,
+            column=1,
+            padx=(10, 20),
+            pady = 0,
+            sticky="e",
+        )
+
+        self.imageTab.pack_propagate(False)
+
         for Dex, Name in enumerate(monNames):
 
             self.temp = PokemonButton(
