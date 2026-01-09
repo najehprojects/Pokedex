@@ -77,7 +77,7 @@ class App(ctk.CTk):
             row=1,
             column=0,
             padx = 20,
-            pady = 10
+            pady = 0
         )
 
         self.imageTab = ImageTabs(
@@ -88,14 +88,20 @@ class App(ctk.CTk):
         )
 
         self.imageTab.grid(
-            row=1,
+            row=0,
             column=1,
             padx=(10, 20),
             pady = 0,
-            sticky="e",
+            rowspan = 2,
+            sticky="ne",
         )
 
         self.imageTab.pack_propagate(False)
+
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=1)
+        self.grid_rowconfigure(1, weight=1)
 
         for Dex, Name in enumerate(monNames):
 
