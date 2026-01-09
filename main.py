@@ -9,6 +9,10 @@ ctk.set_appearance_mode("dark")
 fullMon = pd.read_csv('data/Lists/pokemon.csv')
 monNames = fullMon['Name'].tolist()
 
+class ImageFrame(ctk.CTkImage):
+    def __init__(self):
+        ctk.CTkImage.__init__(self)
+
 class MainFrame(ctk.CTkScrollableFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
@@ -20,6 +24,9 @@ class SearchFrame(ctk.CTkEntry):
 class PokemonButton(ctk.CTkButton):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
+
+def selected(pokemon):
+    print("The pokemon is", pokemon)
 
 class App(ctk.CTk):
     def __init__(self):
@@ -68,6 +75,8 @@ class App(ctk.CTk):
                 width=335,
                 height=30,
                 text=Name,
+                #command=selected(Name)
+                command= selected,
             )
 
             self.temp.grid(
@@ -78,9 +87,6 @@ class App(ctk.CTk):
             )
 
             self.temp.widgetName = Name
-
-    def onPokemonSelected(self, event):
-        self.pokemonList.grid()
 
 app = App()
 app.mainloop()
