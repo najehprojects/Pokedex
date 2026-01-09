@@ -1,28 +1,83 @@
+import customtkinter as ctk
 import matplotlib as mpl
 import pandas as pd
 import numpy as np
-import dearpygui.dearpygui as dpg
+import MoreCustomTkinterWidgets as mw
 
-dpg.create_context()
-dpg.create_viewport(title="ZDex", width=1280, height=720)
-dpg.set_viewport_min_width(1280)
-dpg.set_viewport_min_height(720)
-dpg.set_viewport_max_width(1280)
-dpg.set_viewport_max_height(720)
-dpg.set_viewport_large_icon('data/Images/GreatBall.ico')
+ctk.set_appearance_mode("dark")
 
 fullMon = pd.read_csv('data/Lists/pokemon.csv')
 monNames = fullMon['Name'].tolist()
 
-with dpg.window(tag= "Welcome", label="Welcome", height = int(dpg.get_viewport_height()), width = int(dpg.get_viewport_width())):
-    dpg.add_text("Welcome to ZDex!")
-    dpg.add_text("All Pokemon", indent = int(dpg.get_viewport_width()/2))
-    dpg.add_listbox(label = "AllPokemon", items = monNames, width = int(dpg.get_viewport_width()/2), num_items = 35, indent = int(dpg.get_viewport_width()/2))
-    dpg.set_primary_window("Welcome", True)
+class MainFrame(ctk.CTkScrollableFrame):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
 
-dpg.setup_dearpygui()
-dpg.show_viewport()
-dpg.start_dearpygui()
-dpg.destroy_context()
+class SearchFrame(ctk.CTkEntry):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
 
-print("Success")
+class PokemonButton(ctk.CTkButton):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+
+class App(ctk.CTk):
+    def __init__(self):
+        super().__init__()
+        self.title("ZDex")
+        self.geometry("1000x720")
+        self.resizable(False, False)
+        self.iconbitmap('data/Images/GreatBall.ico')
+
+        self.Search = SearchFrame(
+            master=self,
+            width=215,
+            height=30,
+            placeholder_text= "Search...",
+        )
+
+        self.Search.grid(
+            row=0,
+            column=0,
+            padx=20,
+            pady=20
+        )
+
+        self.pokemonList = MainFrame(
+            master=self,
+            width=350,
+            height=600,
+        )
+
+        self.pokemonList.grid(
+            row=1,
+            column=0,
+            padx = 20,
+            pady = 10
+        )
+
+        count = -1
+
+        for Name in monNames:
+
+            count += 1
+
+            self.temp = PokemonButton(
+                master=self.pokemonList,
+                fg_color= "#1f1f1f",
+                width=335,
+                height=30,
+                text=Name,
+            )
+
+            self.temp.grid(
+                row=count,
+                column=0,
+                padx=5,
+                pady=2
+            )
+
+            self.temp.widgetName = Name
+
+app = App()
+app.mainloop()
