@@ -27,18 +27,9 @@ class PokemonButton(ctk.CTkButton):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
 
-def nameToID(enteredName):
-    count = 0
-    for name in monNames:
-        count += 1
-        if enteredName in name:
-            return count
-
-def selected(pokemon):
-    #ID = nameToID(pokemon)
+def selected(pokemon, indexCode):
     print("The pokemon is", pokemon)
-    #curMonData = fullMon[ID]
-    #print("The current pokemon data:", curMonData)
+    print(fullMon.iloc[indexCode])
 
 class App(ctk.CTk):
     def __init__(self):
@@ -75,11 +66,7 @@ class App(ctk.CTk):
             pady = 10
         )
 
-        count = -1
-
-        for Name in monNames:
-
-            count += 1
+        for Dex, Name in enumerate(monNames):
 
             self.temp = PokemonButton(
                 master=self.pokemonList,
@@ -87,11 +74,11 @@ class App(ctk.CTk):
                 width=340,
                 height=30,
                 text=Name,
-                command=lambda name=Name: selected(name)
+                command=lambda name=Name, dex=Dex: selected(name, dex)
             )
 
             self.temp.grid(
-                row=count,
+                row=Dex,
                 column=0,
                 padx=5,
                 pady=2
