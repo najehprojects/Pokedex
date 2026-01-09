@@ -1,3 +1,5 @@
+from itertools import count
+
 import customtkinter as ctk
 import matplotlib as mpl
 import pandas as pd
@@ -25,8 +27,18 @@ class PokemonButton(ctk.CTkButton):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
 
+def nameToID(enteredName):
+    count = 0
+    for name in monNames:
+        count += 1
+        if enteredName in name:
+            return count
+
 def selected(pokemon):
+    ID = nameToID(pokemon)
     print("The pokemon is", pokemon)
+    curMonData = fullMon[ID]
+    print("The current pokemon data:", curMonData)
 
 class App(ctk.CTk):
     def __init__(self):
@@ -72,11 +84,10 @@ class App(ctk.CTk):
             self.temp = PokemonButton(
                 master=self.pokemonList,
                 fg_color= "#1f1f1f",
-                width=335,
+                width=340,
                 height=30,
                 text=Name,
-                #command=selected(Name)
-                command= selected,
+                command=lambda name=Name: selected(name)
             )
 
             self.temp.grid(
