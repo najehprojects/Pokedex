@@ -26,9 +26,24 @@ class PokemonButton(ctk.CTkButton):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
 
+class ImageTabs(ctk.CTkTabview):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+
 def selected(pokemon, indexCode):
     print("The pokemon is", pokemon)
-    print(fullMon.iloc[indexCode])
+    #print(fullMon.iloc[indexCode])
+    print(fullMon.iloc[indexCode]["Type 1"])
+    pkmnName = fullMon.iloc[indexCode]["Name"]
+
+    if (fullMon.iloc[indexCode]["Name"]).startswith("Mega "):
+        print("IS MEGA")
+
+    if("Mega " + fullMon.iloc[indexCode]["Name"]) in monNames:
+        print("HAS MEGA")
+
+    if ("Mega " + fullMon.iloc[indexCode]["Name"] + " X") in monNames or ("Mega " + fullMon.iloc[indexCode]["Name"] + " Y") in monNames:
+        print("HAS X AND Y MEGA")
 
 class App(ctk.CTk):
     def __init__(self):
