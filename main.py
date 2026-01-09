@@ -79,5 +79,8 @@ class App(ctk.CTk):
 
             self.temp.widgetName = Name
 
+    def onPokemonSelected(self, event):
+        self.pokemonList.grid()
+
 app = App()
 app.mainloop()
