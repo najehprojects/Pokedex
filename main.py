@@ -4,7 +4,6 @@ import customtkinter as ctk
 import matplotlib as mpl
 import pandas as pd
 import numpy as np
-import MoreCustomTkinterWidgets as mw
 
 ctk.set_appearance_mode("dark")
 
