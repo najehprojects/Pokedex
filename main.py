@@ -35,10 +35,10 @@ def nameToID(enteredName):
             return count
 
 def selected(pokemon):
-    ID = nameToID(pokemon)
+    #ID = nameToID(pokemon)
     print("The pokemon is", pokemon)
-    curMonData = fullMon[ID]
-    print("The current pokemon data:", curMonData)
+    #curMonData = fullMon[ID]
+    #print("The current pokemon data:", curMonData)
 
 class App(ctk.CTk):
     def __init__(self):
